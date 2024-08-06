@@ -27,7 +27,7 @@ class ToDo extends Component{
         let {task} = this.state;
 
         if (task) {
-            axios.post(endpoint + "/api/task",
+            axios.post(endpoint + "/api/tasks",
                 {task,},
                 {headers:{
                     "Content-Type":"application/x-www-form-urlencoded",
@@ -72,6 +72,12 @@ class ToDo extends Component{
                                         color="blue"
                                         onClick={() => this.updateTask(item._id)}
                                         />
+                                        <span style={{paddingRight: 10}} > Complete </span>
+                                        <Icon
+                                        name="undo"
+                                        color="yellow"
+                                        onClick={() => this.undoTask(item._id)}
+                                        />
                                         <span style={{paddingRight: 10}} > Undo </span>
                                         <Icon
                                         name="delete"
@@ -94,7 +100,7 @@ class ToDo extends Component{
     };
 
     updateTask = (id) => {
-        axios.put(endpoint + "/api/task" + id, {
+        axios.put(endpoint + "/api/tasks/" + id, {
             headers:{
                 "Content-Type":"application/x-www-form-urlencoded",
             },
@@ -105,7 +111,7 @@ class ToDo extends Component{
     }
 
     undoTask = (id) => {
-        axios.put(endpoint + "/api/undoTask" + id, {
+        axios.put(endpoint + "/api/undoTask/" + id, {
             headers:{
                 "Content-Type":"application/x-www-form-urlencoded",
             },
@@ -116,7 +122,7 @@ class ToDo extends Component{
     };
 
     deleteTask = (id) => {
-        axios.delete(endpoint + "/api/deleteTask" + id, {
+        axios.delete(endpoint + "/api/deleteTask/" + id, {
             headers:{
                 "Content-Type":"application/x-www-form-urlencoded"
             },
